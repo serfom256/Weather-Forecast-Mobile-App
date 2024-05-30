@@ -20,7 +20,9 @@ class GetGeoUseCase @Inject constructor(
             Log.d("GetGeoUseCase1", "111")
             val geo = repository.getGeo(cityName = cityName, apiKey = apiKey)
             Log.d("GetGeoUseCase2", "2 $geo")
-            emit(Resource.Success(geo.body()!![0].toGeo()))
+            geo.body()?.let {
+                emit(Resource.Success(geo.body()!![0].toGeo()))
+            } ?: emit(Resource.Error("Couldn't reach server, check your internet connection"))
         } catch (e: HttpException) {
             emit(Resource.Error(e.localizedMessage ?: "Unexpected error"))
         } catch (e: IOException) {

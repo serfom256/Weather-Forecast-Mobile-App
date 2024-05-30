@@ -6,7 +6,7 @@ import retrofit2.http.*
 
 interface ApiServiceYa {
 
-    @Headers("X-Yandex-API-Key: be652545-e359-404a-8a62-704222ebe7b7")
+    @Headers("X-Yandex-API-Key: 1ed3100a-3327-4e98-a64b-938da332a7b0")
     @GET("forecast")
     suspend fun getForecast(
         @Query("lat") latitude: String,

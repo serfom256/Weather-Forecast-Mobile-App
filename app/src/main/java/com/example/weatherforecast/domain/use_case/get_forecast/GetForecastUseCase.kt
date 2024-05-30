@@ -20,7 +20,9 @@ class GetForecastUseCase @Inject constructor(
             Log.d("UseCase", "111")
             val forecasts = repository.getForecast(latitude = latitude, longitude = longitude)
             Log.d("UseCase", "2 $forecasts")
-            emit(Resource.Success(forecasts.body()!!.forecasts.map { it.toForecast() }))
+            forecasts.body()?.let {
+                emit(Resource.Success(forecasts.body()!!.forecasts.map { it.toForecast() }))
+            } ?: emit(Resource.Error("Couldn't reach server, check your internet connection"))
         } catch (e: HttpException) {
             emit(Resource.Error(e.localizedMessage ?: "Unexpected error"))
         } catch (e: IOException) {

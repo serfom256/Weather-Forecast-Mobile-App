@@ -137,7 +137,7 @@ class ForecastViewModel @Inject constructor(
     private fun getForecastByCityName(cityName: String) {
         getGeoUseCase.getGeo(
             cityName = cityName,
-            apiKey = "0d1c49d9637dc9599e4455ae626ee3f7"  // конечно, в реальности оно будет передаваться по-другому :)
+            apiKey = "0d1c49d9637dc9599e4455ae626ee3f7"
         ).onEach { result ->
             when (result) {
                 is Resource.Success -> {
